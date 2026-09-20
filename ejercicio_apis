@@ -1,0 +1,59 @@
+import requests
+
+API_KEY = "rc_live_cdb2ebfd119f4e129e6d3da1c163be79"
+
+def consultar_pais(nombre_pais: str):
+    """
+    Consulta información de un país y muestra los datos de forma ordenada.
+    """
+    url = f"https://api.restcountries.com/countries/v5?q={nombre_pais}"
+    headers = {"Authorization": f"Bearer {API_KEY}"}
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code != 200:
+        print(f"Error al consultar '{nombre_pais}': código {response.status_code}")
+        return
+    
+    data = response.json()
+    objetos = data["data"]["objects"]
+    
+    if not objetos:
+        print(f"No se encontró información para '{nombre_pais}'")
+        return
+    
+    pais = objetos[0]
+    
+    nombre_comun = pais["names"]["common"]
+    nombre_oficial = pais["names"]["official"]
+    capital = pais["capitals"][0]["name"] if pais["capitals"] else "N/A"
+    poblacion = pais["population"]
+    region = pais["region"]
+    subregion = pais["subregion"]
+    
+    monedas = pais.get("currencies", [])
+    if monedas:
+        moneda_texto = ", ".join(f"{m['name']} ({m['symbol']})" for m in monedas)
+    else:
+        moneda_texto = "N/A"
+    
+    idiomas = pais.get("languages", [])
+    idiomas_texto = ", ".join(idioma["name"] for idioma in idiomas) if idiomas else "N/A"
+    
+    print(f"\n{'='*40}")
+    print(f"País: {nombre_comun}")
+    print(f"Nombre oficial: {nombre_oficial}")
+    print(f"Capital: {capital}")
+    print(f"Región: {region} ({subregion})")
+    print(f"Población: {poblacion:,}")
+    print(f"Moneda: {moneda_texto}")
+    print(f"Idioma(s): {idiomas_texto}")
+    print(f"{'='*40}\n")
+
+
+if __name__ == "__main__":
+    while True:
+        pais = input("Escribe el nombre del país (o 'salir' para terminar): ")
+        if pais.lower() == "salir":
+            break
+        consultar_pais(pais)
