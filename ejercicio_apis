@@ -1,6 +1,6 @@
 import requests
 
-API_KEY = "rc_live_cdb2ebfd119f4e129e6d3da1c163be79"
+API_KEY = ""
 
 def consultar_pais(nombre_pais: str):
     """
