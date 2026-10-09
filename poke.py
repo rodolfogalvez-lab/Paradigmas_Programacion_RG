@@ -1,12 +1,5 @@
-'''
-Implementación sin clases.
-Cada pokemon se guarda en un diccionario y su comportamiento
-se maneja con funciones que reciben ese diccionario.
-'''
-
-
 # "Constructor": crea y devuelve un pokemon
-def crear_pokemon(param_nombre: str, param_tipo: str, param_hp: int, param_ad: int) -> dict:
+def crear_pokemon(param_nombre, param_tipo, param_hp, param_ad):
     pokemon = {
         'nombre': param_nombre.capitalize(),
         'tipo': param_tipo,
@@ -17,18 +10,18 @@ def crear_pokemon(param_nombre: str, param_tipo: str, param_hp: int, param_ad: i
 
 
 # Equivalente a __repr__
-def info_pokemon(pokemon: dict) -> str:
+def info_pokemon(pokemon):
     info_text = f'\n{pokemon["nombre"].capitalize()} | HP: {pokemon["hp"]}'
     return info_text
 
 
 # Equivalente al método damage
-def damage(pokemon: dict, hp_lost: int):
+def damage(pokemon, hp_lost):
     pokemon['hp'] = pokemon['hp'] - hp_lost
 
 
 # Equivalente al método attack
-def attack(atacante: dict, rival: dict):
+def attack(atacante, rival):
 
     if atacante['tipo'] == 'electrico':
         ataque = 'Impactrueno'
