@@ -1,9 +1,4 @@
-'''
-Simulación de batalla pokemon, sin utilizar OOP.
-'''
-
-
-from random import choice
+from random import sample
 from poke import crear_pokemon, attack
 from time import sleep
 
@@ -21,11 +16,10 @@ charmander = crear_pokemon('charmander', 'fuego', 40, 10)
 froakie = crear_pokemon('froakie', 'agua', 40, 20)
 
 
-# Seleccionar 2 pokemon para batalla
+# Seleccionar 2 pokemon distintos para batalla
 pokemon_posibles = [pikachu, chikorita, charmander, froakie]
 
-poke_1 = choice(pokemon_posibles)
-poke_2 = choice(pokemon_posibles)
+poke_1, poke_2 = sample(pokemon_posibles, 2)
 
 print('\n ------ POKEMON SELECCIONADOS ------')
 
